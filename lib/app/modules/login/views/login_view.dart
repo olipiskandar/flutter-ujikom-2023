@@ -10,6 +10,7 @@ class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    LoginController controller = Get.put(LoginController());
     return Scaffold(
       backgroundColor: HexColor('#feeee8'),
       body: SingleChildScrollView(
@@ -22,26 +23,28 @@ class LoginView extends GetView<LoginController> {
                 fit: BoxFit.cover,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
-                decoration: InputDecoration(
+                controller: controller.emailController,
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Email',
                   hintText: 'Masukan Email',
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(
+            Padding(
+              padding: const EdgeInsets.only(
                 left: 15.0,
                 right: 15.0,
                 top: 15,
                 bottom: 0,
               ),
               child: TextField(
+                controller: controller.passwordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Password',
                   hintText: 'Masukan Password',
@@ -59,7 +62,9 @@ class LoginView extends GetView<LoginController> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  controller.loginNow();
+                },
                 child: const Text(
                   'Login',
                   style: TextStyle(
