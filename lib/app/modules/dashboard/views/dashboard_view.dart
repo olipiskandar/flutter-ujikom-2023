@@ -141,9 +141,9 @@ class DashboardView extends GetView<DashboardController> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(15.0),
             child: Text(
-              'My name Agung Wahyudi. Im a backend & mobile developer near Bandung. Coding has become a perfect union of my two favourite passions and I love seeing the results of my efforts helping the users experience. I’m finding unique solutions to complex problems and I’m doing it all while making the worst puns you’ve never heard before.',
+              'Hello.. My name Agung Wahyudi. Im a backend & mobile developer near Bandung. Coding has become a perfect union of my two favourite passions and I love seeing the results of my efforts helping the users experience. I’m finding unique solutions to complex problems and I’m doing it all while making the worst puns you’ve never heard before.',
               style: GoogleFonts.pressStart2p(
                 fontSize: 12,
                 height: 2,
@@ -187,56 +187,63 @@ class DashboardView extends GetView<DashboardController> {
           shrinkWrap: true,
           itemBuilder: (context, index) {
             // Tampilan untuk setiap item headline dalam ListView.Builder
-            return Container(
-              padding: const EdgeInsets.only(
-                top: 5,
-                left: 8,
-                right: 8,
-                bottom: 5,
-              ),
-              height: 110,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Widget untuk menampilkan gambar headline dengan menggunakan url gambar dari data yang diterima
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.network(
-                      snapshot.data!.data![index].urlToImage.toString(),
-                      height: 130,
-                      width: 130,
-                      fit: BoxFit.cover,
+            return GestureDetector(
+              onTap: () async {
+                if (!await launchUrl(Uri.parse(snapshot.data!.data![index].url.toString()))) {
+                  throw Exception('Could not launch');
+                }
+              },
+              child: Container(
+                padding: const EdgeInsets.only(
+                  top: 5,
+                  left: 8,
+                  right: 8,
+                  bottom: 5,
+                ),
+                height: 110,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Widget untuk menampilkan gambar headline dengan menggunakan url gambar dari data yang diterima
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.network(
+                        snapshot.data!.data![index].urlToImage.toString(),
+                        height: 130,
+                        width: 130,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // Widget untuk menampilkan judul headline dengan menggunakan data yang diterima
-                        Text(
-                          snapshot.data!.data![index].title.toString(),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                        const SizedBox(
-                          height: 2,
-                        ),
-                        // Widget untuk menampilkan informasi author dan sumber headline dengan menggunakan data yang diterima
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Author : ${snapshot.data!.data![index].author}'),
-                            Text('Sumber :${snapshot.data!.data![index].name}'),
-                          ],
-                        ),
-                      ],
+                    const SizedBox(
+                      width: 10,
                     ),
-                  ),
-                ],
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // Widget untuk menampilkan judul headline dengan menggunakan data yang diterima
+                          Text(
+                            snapshot.data!.data![index].title.toString(),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                          const SizedBox(
+                            height: 2,
+                          ),
+                          // Widget untuk menampilkan informasi author dan sumber headline dengan menggunakan data yang diterima
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Author : ${snapshot.data!.data![index].author}'),
+                              Text('Sumber :${snapshot.data!.data![index].name}'),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           },
@@ -267,53 +274,60 @@ class DashboardView extends GetView<DashboardController> {
           controller: scrollController,
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            return Container(
-              padding: const EdgeInsets.only(
-                top: 5,
-                left: 8,
-                right: 8,
-                bottom: 5,
-              ),
-              height: 110,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.network(
-                      snapshot.data!.data![index].urlToImage.toString(),
-                      height: 130,
-                      width: 130,
-                      fit: BoxFit.cover,
+            return GestureDetector(
+              onTap: () async {
+                if (!await launchUrl(Uri.parse(snapshot.data!.data![index].url.toString()))) {
+                  throw Exception('Could not launch');
+                }
+              },
+              child: Container(
+                padding: const EdgeInsets.only(
+                  top: 5,
+                  left: 8,
+                  right: 8,
+                  bottom: 5,
+                ),
+                height: 110,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.network(
+                        snapshot.data!.data![index].urlToImage.toString(),
+                        height: 130,
+                        width: 130,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          snapshot.data!.data![index].title.toString(),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                        const SizedBox(
-                          height: 2,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Author : ${snapshot.data!.data![index].author}'),
-                            Text('Sumber :${snapshot.data!.data![index].name}'),
-                          ],
-                        ),
-                      ],
+                    const SizedBox(
+                      width: 10,
                     ),
-                  ),
-                ],
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            snapshot.data!.data![index].title.toString(),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                          const SizedBox(
+                            height: 2,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Author : ${snapshot.data!.data![index].author}'),
+                              Text('Sumber :${snapshot.data!.data![index].name}'),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           },
@@ -344,53 +358,60 @@ class DashboardView extends GetView<DashboardController> {
           controller: scrollController,
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            return Container(
-              padding: const EdgeInsets.only(
-                top: 5,
-                left: 8,
-                right: 8,
-                bottom: 5,
-              ),
-              height: 110,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.network(
-                      snapshot.data!.data![index].urlToImage.toString(),
-                      height: 130,
-                      width: 130,
-                      fit: BoxFit.cover,
+            return GestureDetector(
+              onTap: () async {
+                if (!await launchUrl(Uri.parse(snapshot.data!.data![index].url.toString()))) {
+                  throw Exception('Could not launch');
+                }
+              },
+              child: Container(
+                padding: const EdgeInsets.only(
+                  top: 5,
+                  left: 8,
+                  right: 8,
+                  bottom: 5,
+                ),
+                height: 110,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.network(
+                        snapshot.data!.data![index].urlToImage.toString(),
+                        height: 130,
+                        width: 130,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          snapshot.data!.data![index].title.toString(),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                        const SizedBox(
-                          height: 2,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Author : ${snapshot.data!.data![index].author}'),
-                            Text('Sumber :${snapshot.data!.data![index].name}'),
-                          ],
-                        ),
-                      ],
+                    const SizedBox(
+                      width: 10,
                     ),
-                  ),
-                ],
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            snapshot.data!.data![index].title.toString(),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                          const SizedBox(
+                            height: 2,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Author : ${snapshot.data!.data![index].author}'),
+                              Text('Sumber :${snapshot.data!.data![index].name}'),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           },
