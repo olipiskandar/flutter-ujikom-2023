@@ -28,12 +28,15 @@ class HomeView extends GetView<HomeController> {
             const SizedBox(
               height: 15,
             ),
-            Text(
-              'Aplikasi Portal Berita Indonesia',
-              style: GoogleFonts.roboto(
-                textStyle: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
+            Center(
+              child: Text(
+                'Aplikasi Portal Berita Indonesia',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.roboto(
+                  textStyle: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                  ),
                 ),
               ),
             ),
